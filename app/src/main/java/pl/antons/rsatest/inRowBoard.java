@@ -25,8 +25,12 @@ public class inRowBoard extends BaseAdapter {
         //Filing empty board by moves history
         int mvs = 0;
         for (String move:moves.split("(?!^)")) {
-            if(move!="")
-                this.move(Integer.parseInt(move), mvs++%2);
+            if(move!=""){
+                try{
+                    this.move(Integer.parseInt(move), mvs++%2);
+                }catch (Exception e) {
+                }
+            }
         }
         //Setting Current Player
         player = mvs%2;
@@ -81,17 +85,17 @@ public class inRowBoard extends BaseAdapter {
         int row = 5-position/7;
 
         //Set appropriate image
-           switch (board[row][col]){
-                    case 0:
-                        iv.setImageResource(R.drawable.circle);
-                        break;
-                    case 1:
-                        iv.setImageResource(R.drawable.player1);
-                        break;
-                    case 2:
-                        iv.setImageResource(R.drawable.player2);
-                        break;
-                }
+        switch (board[row][col]){
+            case 0:
+                iv.setImageResource(R.drawable.circle);
+                break;
+            case 1:
+                iv.setImageResource(R.drawable.player1);
+                break;
+            case 2:
+                iv.setImageResource(R.drawable.player2);
+                break;
+        }
 
         //Seting size of image - 120x120 px
         iv.setLayoutParams(new LinearLayout.LayoutParams(120,120));

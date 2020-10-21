@@ -133,8 +133,8 @@ public class inRow extends AppCompatActivity {
                     inRowBoard game = (inRowBoard)gv.getAdapter();
                     int game_status = game.checkWin();
                     if (game_status==0)
-                            //next turn
-                            hints(inRow.WAIT);
+                        //next turn
+                        hints(inRow.WAIT);
                     else{
                         if(game_status==player)
                             //You win
@@ -149,7 +149,7 @@ public class inRow extends AppCompatActivity {
                     if(resultCode==500)
                         hints(inRow.NETWORK_ERROR);
                     else
-                    //other error
+                        //other error
                         hints(inRow.ERROR);
                     //Show serwer error message
                     Log.d("DEBUG", response.getString("http_status"));
@@ -194,7 +194,7 @@ public class inRow extends AppCompatActivity {
 
             }catch(Exception ex){
                 //Json handler error
-               ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }
