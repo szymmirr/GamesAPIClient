@@ -1,0 +1,27 @@
+name: Run Gradle
+on: [push, pull_request]
+jobs:
+  gradle:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2.9.0
+      with:
+        dependency-graph: generate-and-submit
+
+    - name: Execute Gradle build
+      run: ./gradlew build
