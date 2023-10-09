@@ -30,19 +30,22 @@ jobs:
     - name: Validate Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
 
-    - name: Check lint
-      run: ./gradlew lint
-
-    - name: Upload lint reports
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: app/build/reports
-
     - name: Execute Gradle build
       run: ./gradlew build
+
+    - name: Execute Gradle assemble
+      run: ./gradlew assemble
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: gamesapiclient-artifact
-        path: build/generated
+        path: build
+
+    - name: Check lint
+      run: ./gradlew :app:lint
+
+    - name: Upload lint reports
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: app/build/reports
